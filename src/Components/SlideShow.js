@@ -30,6 +30,7 @@ function SlideShow({ height, width, pages = [], autoplay = false, infinity = fal
     function handleTouch(e) {
       e.preventDefault()
       setSliding(true)
+
       setTransX((transX) => {
         if (transX > -totleLength) {
           return transX - totleLength
@@ -41,6 +42,8 @@ function SlideShow({ height, width, pages = [], autoplay = false, infinity = fal
       })
       slide.addEventListener('touchmove', move)
       slide.addEventListener('touchend', removeEvent)
+
+      window.clearInterval(intervalId)
     }
 
     function removeEvent() {
@@ -55,6 +58,8 @@ function SlideShow({ height, width, pages = [], autoplay = false, infinity = fal
 
       slide.removeEventListener('touchmove', move)
       slide.removeEventListener('touchend', removeEvent)
+
+      intervalId = window.setInterval(autoplayFunc,2500)
     }
 
     function move(e) {
@@ -67,26 +72,26 @@ function SlideShow({ height, width, pages = [], autoplay = false, infinity = fal
 
     // 自动播放
     if(autoplay){
-      intervalId = window.setInterval(()=>{
-      
-        setTransX((transX)=>{
-          if(transX === -totleLength * 2 + windowWidth){
-            setSliding(false)
-            timeoutId = setTimeout(() => {
-              setSliding(true)
-              setTransX(-totleLength)
-            }, 300);
-          }else {
-            setSliding(false)
-            timeoutId = setTimeout(() => {
-              setSliding(true)
-            }, 300);    
-          }
-          return transX - windowWidth
-        })
+      intervalId = window.setInterval(autoplayFunc,2500)
+    }
 
-       
-      },2500)
+    function autoplayFunc(){
+      setTransX((transX)=>{
+        if(transX === -totleLength * 2 + windowWidth){
+          setSliding(false)
+          timeoutId = setTimeout(() => {
+            setSliding(true)
+            setTransX(-totleLength)
+          }, 300);
+        }else {
+          setSliding(false)
+          timeoutId = setTimeout(() => {
+            setSliding(true)
+          }, 300);    
+        }
+        updateSlidePage(transX - windowWidth)
+        return transX - windowWidth
+      })
     }
 
     return () => {
@@ -95,7 +100,7 @@ function SlideShow({ height, width, pages = [], autoplay = false, infinity = fal
       window.clearInterval(intervalId)
     }
 
-  }, [])
+  }, [windowWidth])
 
   function updateSlidePage(transX) {
     let currentPage = Math.abs((transX / windowWidth) % length)

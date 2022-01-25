@@ -10,7 +10,6 @@ function CategoryPage() {
   const [articleData, setArticleData] = useImmer([])
   const wrapper = useRef(null)
   const getArticle = async () => {
-    console.log('get');
     let data = await axios.get('/apis/category/' + name)
     setArticleData((draft) => {
       draft.push(...data.data)
@@ -42,7 +41,6 @@ function CategoryPage() {
         }
       }
     }
-
 
     return () => {
       window.removeEventListener('scroll', handleScroll)

@@ -9,7 +9,6 @@ function Recommed() {
   const [articleData, setArticleData] = useImmer([])
   const wrapper = useRef(null)
   const getArticle = async () => {
-    console.log('get');
     let data = await axios.get('/apis/article')
     setArticleData((draft) => {
       draft.push(...data.data)
