@@ -1,0 +1,39 @@
+.articleBox {
+  padding: 0 16px;
+  position: relative;
+  display: flow-root;
+}
+
+.content {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 1.6rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.title {
+  font-size: 1.7rem;
+  font-weight: bold;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.body {
+  margin-top: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.descbox {
+  display:  flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.desc {
+  font-size: 1.4rem;
+  color: rgb(128, 128, 128);
+}

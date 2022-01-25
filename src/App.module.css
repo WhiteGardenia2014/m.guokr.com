@@ -1,0 +1,129 @@
+.App {
+  text-align: center;
+  display: flow-root;
+}
+
+.App a {
+  text-decoration: none;
+  color: black;
+}
+
+html {
+  font-size: 10px;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-start;
+  z-index: 100;
+  position: relative;
+  height: 39px;
+  padding-left: 6px;
+  top: 44px;
+}
+
+.nav a {
+  display: block;
+  line-height: 39px;
+  padding: 0 10px;
+  font-size: 15px;
+}
+
+.logo{
+  display: flex;
+  flex:1;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainNav {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  transition: z-index 0s 0.3s;
+  top: 44px;
+}
+
+.mainNav .nav_mask{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: black;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out 0s;
+}
+
+.mainNav ul {
+  width: 100%;
+  position: absolute;
+  display: flow-root;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+  background: white;
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.mainNav li{
+  list-style: none;
+  height: 64px;
+  line-height: 64px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.mainNav li:first-child{
+  margin-top: 20px;
+  font-weight: 700;
+  background: url(./images/firstpage.png) right center / contain no-repeat;
+}
+
+.navBody li {
+  opacity: 1;
+}
+
+.navBodyHidden li {
+  opacity: 0;
+}
+
+:global(.active) {
+  font-weight: 700;
+}
+
+
+
+/* ========================================================================== */
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
