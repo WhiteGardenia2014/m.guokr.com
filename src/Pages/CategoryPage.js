@@ -18,9 +18,15 @@ function CategoryPage() {
 
   useEffect(() => {
     setArticleData([])
-    getArticle()
+    let getting = true
 
-    let getting = false
+    getArticle().then((result) => {
+      getting = false
+    }, (reason) => {
+      console.log(reason);
+    }).finally(() => {
+      getting = false
+    })
 
     window.addEventListener('scroll', handleScroll)
 
@@ -36,6 +42,8 @@ function CategoryPage() {
               getting = false
             }, (reason) => {
               console.log(reason);
+            }).finally(() => {
+              getting = false
             })
           }
         }

@@ -4,9 +4,8 @@ import Recommed from './Pages/Recommed';
 import CategoryPage from './Pages/CategoryPage';
 import NotFound from "./Pages/NotFound";
 import { MenuOutlined, CloseOutlined } from '@ant-design/icons'
-
-import logo from './images/guokr.png';
 import { useCallback, useState } from "react";
+import DropNav from './Components/DropNav'
 
 require('./mock.js')
 
@@ -40,32 +39,19 @@ function App() {
   return (
     <Router>
       <div className={styles.App}>
-        <header style={{ position: 'fixed', width: '100%', zIndex: '1', backgroundColor: 'white' }}>
-          <div style={{ display: 'flex', height: '44px', padding: "0 16px", backgroundColor: 'white', width: '100%', position: 'fixed', zIndex: '500', boxSizing: 'border-box' }}>
-            <div onClick={toggleNav} style={{ lineHeight: '44px' }}>
-              {showNav ? <CloseOutlined style={{ fontSize: '20px', color: '#ccc' }} /> : <MenuOutlined style={{ fontSize: '20px', color: '#ccc' }} />}
+        <header className={styles.header} >
+          <div className={styles.headerLayout}>
+            <div className={styles.toggleButton} onClick={toggleNav} >
+              {showNav ? <CloseOutlined /> : <MenuOutlined />}
             </div>
             <div className={styles.logo}>
-              <Link to="/" title="果壳 科技有意思" style={{ display: 'block', height: '20px' }}>
-                <img src={logo} alt="logo" style={{ width: '42px', height: '20px' }} />
+              <Link to="/" title="果壳 科技有意思">
+                <img src='/images/guokr.png' alt="logo" />
               </Link>
             </div>
           </div>
-          <div className={styles.mainNav} style={{ zIndex: `${showNav ? '200' : '-1'}`, transition: `z-index 0s ${showNav ? '0s' : '0.6s'}`, position: 'fixed', height: `${showNav ? '100%' : '0'}` }}>
-            <div className={styles.nav_mask} style={{ opacity: `${showNav ? '0.7' : '0'}` }}></div>
-            <ul className={showNav ? styles.navBody : styles.navBodyHidden} style={{ height: `${showNav ? '330' : '0'}px`, fontSize: '1.6rem' }}>
-              {
-                dropNavContent.map((item, index) => {
-                  return (
-                    <li key={index}>
-                      <a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>
-                    </li>
-                  )
-                })
-              }
-            </ul>
-          </div>
-          <nav className={styles.nav} style={{ boxShadow: 'rgb(0, 0, 0, 0.1) 0px 0px 10px 0px', backgroundColor: 'white' }}>
+          <DropNav content={dropNavContent} showNav={showNav}></DropNav>
+          <nav className={styles.nav} >
             {
               navContent.map((item, index) => {
                 return <NavLink key={index} to={item.url}>{item.title}</NavLink>
