@@ -1,0 +1,96 @@
+.contentBox {
+  position: relative;
+  width: 100%;
+  padding: 0 24px;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.authorInfo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.avatar {
+  width: 6.7rem;
+  height: 6.7rem;
+  border-radius: 100%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 0;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 6.7rem;
+  flex: 1;
+  padding-left: 24px;
+}
+
+.name {
+  font-size: 2rem;
+  color: rgb(38, 38, 38);
+  font-weight: 600;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.name p {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.desc {
+  margin-top: 6px;
+  font-size: 1.3rem;
+  color: rgb(179, 179, 179);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.articleList {
+  padding: 0;
+  list-style: none;
+  margin: 2.4rem 0 0;
+  font-size: 1.5rem;
+}
+
+.articleItem {
+  display: flex;
+  color: rgb(38, 38, 38);
+  font-weight: 600;
+  margin-bottom: 1.6rem;
+  align-items: center;
+}
+
+.articleItem a {
+  text-decoration: none;
+  color: rgb(38, 38, 38);
+}
+
+.imgBox {
+  font-size: 0;
+  width: 7.5rem;
+  height: 5rem;
+  margin-right: 1.6rem;
+}
+
+.imgBox img {
+  width: 100%;
+  height: 100%;
+}

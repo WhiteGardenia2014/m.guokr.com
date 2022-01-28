@@ -1,0 +1,22 @@
+
+.nav {
+  display: flex;
+  justify-content: flex-start;
+  z-index: 100;
+  position: fixed;
+  height: 39px;
+  padding-left: 6px;
+  top: 44px;
+  box-shadow: rgb(0, 0, 0, 0.1) 0px 0px 10px 0px;
+  background-color: white;
+  overflow-x: scroll;
+  width: 100%;
+}
+
+.nav a {
+  display: block;
+  line-height: 39px;
+  padding: 0 10px;
+  font-size: 15px;
+  white-space: nowrap;
+}

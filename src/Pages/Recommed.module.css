@@ -1,0 +1,13 @@
+.mainSlideLayout {
+  margin-top: 83px;
+  padding-bottom: 34px;
+  position: relative;
+}
+
+
+.otherSlideLayout{
+  position: relative;
+  padding: 24px 0 44px ;
+  background-color: rgb(247,250,255);
+  margin-top: -1px;
+}

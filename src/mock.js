@@ -62,11 +62,56 @@ mock('/apis/recommed', 'get', options => {
     articleData.push(item)
   }
 
+  let accountSlideData = []
+  for (let i = 0; i < 3; i++) {
+    let item = {
+      account: {
+        imgUrl: Random.dataImage('75x75'),
+        name: Random.cword(2, 5),
+        desc: Random.cword(4, 7),
+      },
+      articles: Array(3).fill(0).map(() => {
+        return {
+          imgUrl: Random.dataImage('75x50'),
+          title: Random.cword(10, 20),
+          url: 'https://m.guokr.com/article/' + String(Random.integer(460000, 461000))
+        }
+      })
+    }
+    accountSlideData.push(item)
+  }
+
+  let categorySlideData = []
+  for (let i = 0; i < 3; i++) {
+    let item = {
+      category: Random.cword(3, 4),
+      url: categoryUrl[Math.random() * 6 | 0],
+      articles: Array(4).fill(0).map(() => {
+        return {
+          imgUrl: Random.dataImage('75x50'),
+          title: Random.cword(10, 20),
+          url: 'https://m.guokr.com/article/' + String(Random.integer(460000, 461000))
+        }
+      })
+    }
+    categorySlideData.push(item)
+  }
+
   data.slideData = slideData
   data.articleData = articleData
+  data.accountSlideData = accountSlideData
+  data.categorySlideData = categorySlideData
   return data
 })
 
+const categoryUrl = [
+  'https://m.guokr.com/science/category/science',
+  'https://m.guokr.com/science/category/funny',
+  'https://m.guokr.com/science/category/life',
+  'https://m.guokr.com/science/category/health',
+  'https://m.guokr.com/science/category/humanities',
+  'https://m.guokr.com/science/category/nature',
+]
 
 setup({
   timeout: 200

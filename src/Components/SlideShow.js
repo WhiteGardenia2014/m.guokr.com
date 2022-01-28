@@ -1,21 +1,20 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from 'react/cjs/react.development'
 import styles from './SlideShow.module.css'
 
-function SlideShow({ height, width, pages = [], autoplay = false, infinity = false }) {
-  const length = pages.length
+function SlideShow({ height, width, pagesData = [], autoplay = false, infinity = false, children }) {
+  const length = pagesData.length
   const windowWidth = window.screen.width
 
   const slidebox = useRef(null)
-  const slidePages = useRef({ pages: [] })
 
-  const [transX, setTransX] = useState(-windowWidth * length)
+  const [transX, setTransX] = useState(0)
   const [sliding, setSliding] = useState(true)
   const [currentSlidePage, setCurrentSlidePage] = useState(0)
 
 
   useEffect(() => {
-    if(pages === []){
+    if (pagesData === []) {
       return
     }
 
@@ -23,10 +22,8 @@ function SlideShow({ height, width, pages = [], autoplay = false, infinity = fal
     const slide = slidebox.current
 
     if (infinity) {
-      slidePages.current.pages = [...pages, ...pages, ...pages]
       setTransX(-totleLength)
     } else {
-      slidePages.current.pages = [...pages]
       setTransX(0)
     }
 
@@ -38,7 +35,6 @@ function SlideShow({ height, width, pages = [], autoplay = false, infinity = fal
     let intervalId = null
 
     function handleTouch(e) {
-      e.preventDefault()
       setSliding(true)
 
       if (infinity) {
@@ -106,7 +102,13 @@ function SlideShow({ height, width, pages = [], autoplay = false, infinity = fal
           if (infinity) {
             return transX + dx
           } else {
-            return transX + dx
+            if(transX + dx > 0){
+              return transX + 0.3 * dx
+            }else if(transX + dx < -totleLength + windowWidth) {
+              return transX + 0.3 * dx
+            }else {
+              return transX + dx
+            }
           }
         })
       }
@@ -143,7 +145,7 @@ function SlideShow({ height, width, pages = [], autoplay = false, infinity = fal
       window.clearInterval(intervalId)
     }
 
-  }, [windowWidth, pages])
+  }, [windowWidth, pagesData])
 
   function updateSlidePage(transX) {
     let currentPage = Math.abs((transX / windowWidth) % length)
@@ -152,18 +154,40 @@ function SlideShow({ height, width, pages = [], autoplay = false, infinity = fal
 
 
   return (
-    <div >
+    <div className={styles.slideLayoutBox} >
       <div ref={slidebox} style={{ height, width, overflow: 'hidden' }}>
         <div className={styles.slidebox} style={{ transform: `translate3d(${transX}px, 0px, 0px)`, transitionDuration: `${sliding ? 0 : 300}ms` }}>
-          {slidePages.current.pages.map((page, index) => {
-            return <div style={{ width: `100%`, flexShrink: '0', height: '100%' }} key={index}>{page}</div>
-          })}
+          {
+            infinity === true
+              ? [...pagesData, ...pagesData, ...pagesData].map((item, index) => {
+                return (
+                  <div key={index} className={styles.slideContent}>
+                    {
+                      React.cloneElement(children, {
+                        params: item
+                      })
+                    }
+                  </div>
+                )
+              })
+              : [...pagesData].map((item, index) => {
+                return (
+                  <div key={index} className={styles.slideContent}>
+                    {
+                      React.cloneElement(children, {
+                        params: item
+                      })
+                    }
+                  </div>
+                )
+              })
+          }
         </div>
         <div className={styles.slidePagination} >
           {
             Array(length).fill(0).map((value, index) => {
               return (
-                <span key={index} className={styles.paginationBullet} style={{ backgroundColor: `${currentSlidePage === index ? 'rgb(38,38,38)' : 'rgb(163,170,204)'}` }}></span>
+                <span key={index} className={`${styles.paginationBullet} ${currentSlidePage === index ? styles.current : ''}`}></span>
               )
             })
           }
